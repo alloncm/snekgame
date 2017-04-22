@@ -107,7 +107,7 @@ void Game::UpdateModel()
 }
 void Game::ComposeFrame()
 {
-	//draw the fucking objects
+	//draw the objects
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();
