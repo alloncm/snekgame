@@ -26,13 +26,14 @@ Game::Game(MainWindow& wnd) :
 	wnd(wnd),
 	gfx(wnd),
 	brd(gfx),
-	rng(rd()),
+	rng((static_cast<std::mt19937::result_type>(std::time(nullptr)))),
 	snek(Location{ Board::Width / 2,Board::Height / 2 }),
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(15)
+	snekMovePeriod(15),
+	addingObs(0)
 {
 }
 
@@ -88,7 +89,7 @@ void Game::UpdateModel()
 				{
 					snek.Grow(delta);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
-					if (snekMovePeriod > 4)
+					if (snekMovePeriod > 6)
 					{
 						snekMovePeriod--;
 					}
@@ -100,6 +101,12 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					goal.Respawn(rng, brd, snek);		//respawn the goal
+					addingObs++;
+				}
+				if (addingObs == level)
+				{
+					brd.AddObs(rng,snek);
+					addingObs = 0;
 				}
 			}
 		}
@@ -111,4 +118,5 @@ void Game::ComposeFrame()
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();
+	brd.DrawObs();
 }

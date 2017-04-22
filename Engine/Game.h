@@ -27,6 +27,7 @@
 #include <random>
 #include "Snake.h"
 #include "Goal.h"
+#include<ctime>
 class Game
 {
 public:
@@ -50,11 +51,12 @@ private:
 	Board brd;			//board object	
 	Location delta;		//location object to move by
 	std::mt19937 rng;	//random object to respawn goals
-	std::random_device rd;
+	std::mt19937 gen;
 	Goal goal;			//goal object
 	int snekMovePeriod;	//the period of frames the snek moves by	
 	int snekCounter;	//counts the frames passed from last move
 	bool isGameOver;	//checks for game over
-	
+	int addingObs;
+	static constexpr int level = 3;
 	/********************************/
 };
