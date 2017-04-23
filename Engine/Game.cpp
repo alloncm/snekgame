@@ -32,7 +32,7 @@ Game::Game(MainWindow& wnd) :
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(15)
+	snekMovePeriod(8)
 {
 }
 
@@ -88,10 +88,12 @@ void Game::UpdateModel()
 				{
 					snek.Grow(delta);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
+					/*
 					if (snekMovePeriod > 4)
 					{
 						snekMovePeriod--;
 					}
+					*/
 				}
 				else
 				{
