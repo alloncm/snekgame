@@ -32,7 +32,9 @@ Game::Game(MainWindow& wnd) :
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(8)
+	snekMovePeriod(8),
+	obs(),
+	addObs(0)
 {
 }
 
@@ -77,11 +79,15 @@ void Game::UpdateModel()
 			snekCounter = 0;		//init the counter
 
 			//checks for game over
+			isGameOver = CheckForGameOver(next);
+			/*
 			if (!(brd.IsInBounds(next)) || snek.IsInTileExeptEnd(next))
 			{
 				isGameOver = true;
 			}
-			else
+			*/
+			//else
+			if(!isGameOver)
 			{
 				const bool eating = next == goal.GetLoc();		//checks for eating the goal
 				if (eating)
@@ -101,11 +107,22 @@ void Game::UpdateModel()
 				}
 				if (eating)
 				{
-					goal.Respawn(rng, brd, snek);		//respawn the goal
+					goal.Respawn(rng, brd, snek);//respawn the goal
+					addObs++;
+				}
+				if (addObs >= obsRate)
+				{
+					obs.Add(snek, goal);
+					addObs = 0;
 				}
 			}
 		}
 	}
+}
+bool Game::CheckForGameOver(Location& nextloc)
+{
+	bool gameover = obs.IsInTile(nextloc)|| (!(brd.IsInBounds(nextloc)))|| snek.IsInTileExeptEnd(nextloc);
+	return gameover;
 }
 void Game::ComposeFrame()
 {
@@ -113,4 +130,5 @@ void Game::ComposeFrame()
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();
+	obs.Draw(brd);
 }

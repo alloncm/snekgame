@@ -27,6 +27,7 @@
 #include <random>
 #include "Snake.h"
 #include "Goal.h"
+#include "Obstacle.h"
 class Game
 {
 public:
@@ -39,6 +40,7 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	bool CheckForGameOver(Location& nextloc);
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -55,6 +57,8 @@ private:
 	int snekMovePeriod;	//the period of frames the snek moves by	
 	int snekCounter;	//counts the frames passed from last move
 	bool isGameOver;	//checks for game over
-	
+	Obstacles obs;
+	int addObs;
+	static constexpr int obsRate = 3;
 	/********************************/
 };
