@@ -80,13 +80,8 @@ void Game::UpdateModel()
 
 			//checks for game over
 			isGameOver = CheckForGameOver(next);
-			/*
-			if (!(brd.IsInBounds(next)) || snek.IsInTileExeptEnd(next))
-			{
-				isGameOver = true;
-			}
-			*/
-			//else
+			
+			
 			if(!isGameOver)
 			{
 				const bool eating = next == goal.GetLoc();		//checks for eating the goal
@@ -94,12 +89,6 @@ void Game::UpdateModel()
 				{
 					snek.Grow(delta);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
-					/*
-					if (snekMovePeriod > 4)
-					{
-						snekMovePeriod--;
-					}
-					*/
 				}
 				else
 				{
