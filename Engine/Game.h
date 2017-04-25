@@ -59,6 +59,6 @@ private:
 	bool isGameOver;	//checks for game over
 	Obstacles obs;
 	int addObs;
-	static constexpr int obsRate = 3;
+	static constexpr int obsRate = 1;
 	/********************************/
 };

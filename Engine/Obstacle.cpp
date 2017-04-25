@@ -22,7 +22,7 @@ void Obstacles::Add(Snake snek, Goal g)
 	size++;
 }
 
-bool Obstacles::IsInTile(Location& l)
+bool Obstacles::IsInTile(const Location& l)const
 {
 	for (int i = 0; i < size; i++)
 	{

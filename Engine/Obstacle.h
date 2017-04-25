@@ -18,6 +18,6 @@ private:
 public:
 	Obstacles();
 	void Add(Snake snek, Goal g);
-	bool IsInTile(Location& loc);
+	bool IsInTile(const Location& loc) const;
 	void Draw(Board brd);
 };

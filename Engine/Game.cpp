@@ -97,6 +97,11 @@ void Game::UpdateModel()
 				if (eating)
 				{
 					goal.Respawn(rng, brd, snek);//respawn the goal
+					//checks if the goal respawn on an existing obstacle
+					while (obs.IsInTile(goal.GetLoc()))
+					{
+						goal.Respawn(rng, brd, snek);
+					}
 					addObs++;
 				}
 				if (addObs >= obsRate)
