@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+using namespace std::chrono;
 
 Game::Game(MainWindow& wnd) :
 	wnd(wnd),
@@ -32,9 +33,10 @@ Game::Game(MainWindow& wnd) :
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(8),
+	snekMovePeriod(0.1),
 	obs(),
-	addObs(0)
+	addObs(0),
+	ft()
 {
 }
 
@@ -70,14 +72,15 @@ void Game::UpdateModel()
 		}
 
 
-		snekCounter++;	//increasing the frames passed since last move
 		Location next = snek.GetNextLocation(delta);	//getting the next location of the snek by the keys been pressed
 		
+		snekCounter += ft.Mark();
+
 		//checks if the numbers of frames that passed is enough to move the snek
 		if (snekCounter >= snekMovePeriod)
 		{
 			snekCounter = 0;		//init the counter
-
+		
 			//checks for game over
 			isGameOver = CheckForGameOver(next);
 			
