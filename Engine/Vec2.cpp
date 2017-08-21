@@ -16,8 +16,8 @@ Vec2::Vec2(float x1, float y1)
 
 Vec2 Vec2::operator+(const Vec2 & v) const
 {
-	Vec2 v(x + v.x, y + v.y);
-	return v;
+	Vec2 d(x + v.x, y + v.y);
+	return d;
 }
 
 Vec2 Vec2::operator-(const Vec2 & v)const

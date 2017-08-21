@@ -39,5 +39,6 @@ void Obstacles::Draw(Board brd)
 	for (int i = 0; i < size; i++)
 	{
 		brd.DrawCell(obs[i].loc, c);
+		brd.TileIsFull(obs[i].loc);
 	}
 }

@@ -19,13 +19,14 @@ void Goal::Respawn(std::mt19937 rng, const Board & brd, const Snake & snek)
 	{
 		newloc.x = xdist(gen);
 		newloc.y = ydist(gen);	
-	} while (snek.isInTile(newloc));
+	} while (!brd.IsTileEmpty(newloc));
 	loc = newloc;
 }
 
 void Goal::Draw(Board & brd) const
 {
 	brd.DrawCell(loc, c);
+	brd.TileIsFull(loc);
 }
 
 const Location & Goal::GetLoc() const

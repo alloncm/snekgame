@@ -101,10 +101,12 @@ void Game::UpdateModel()
 				{
 					goal.Respawn(rng, brd, snek);//respawn the goal
 					//checks if the goal respawn on an existing obstacle
-					while (obs.IsInTile(goal.GetLoc()))
+					/*
+					while (brd.IsTileEmpty(goal.GetLoc()))
 					{
 						goal.Respawn(rng, brd, snek);
 					}
+					*/
 					addObs++;
 				}
 				if (addObs >= obsRate)
@@ -124,6 +126,7 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
+	brd.ReformatBoard();
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();

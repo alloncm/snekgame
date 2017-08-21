@@ -89,6 +89,7 @@ void Snake::Segment::MoveBy(const Location & delta)
 void Snake::Segment::Draw(Board & brd)
 {
 	brd.DrawCell(loc, c);
+	brd.TileIsFull(loc);
 }
 
 const Location& Snake::Segment::GetLoc()const
