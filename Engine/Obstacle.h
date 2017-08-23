@@ -12,7 +12,7 @@ private:
 private:
 	static constexpr int obsSize = 50;
 	Obstacle obs[obsSize];
-	Color c = Colors::Gray;
+	Color c = Colors::White;
 	int size;
 public:
 	Obstacles();

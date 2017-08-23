@@ -115,6 +115,11 @@ void Game::UpdateModel()
 					obs.Add(brd);
 					addObs = 0;
 				}
+				if (speedObs.IsTaken(next))
+				{
+					speedObs.Remove(next);
+					snekMovePeriod *= 0.90;
+				}
 			}
 		}
 	}
@@ -127,7 +132,7 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
-	//speedObs.Draw(brd);
+	speedObs.Draw(brd);
 	brd.ReformatBoard();
 	snek.Draw(brd);
 	goal.Draw(brd);

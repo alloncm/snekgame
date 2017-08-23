@@ -12,7 +12,7 @@ class SpeedObstacles
 		Obstacle(Location& loc, Color c);
 	};
 public:
-	static const int numObs = (Board::Height*Board::Width) / 2;
+	static const int numObs = (Board::Height*Board::Width) / 5;
 
 private:
 	Obstacle* Obstacles[Board::Height*Board::Width];

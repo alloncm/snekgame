@@ -30,7 +30,7 @@ void SpeedObstacles::Draw(Board & b)
 {
 	for (int i = 0; i < Board::Height*Board::Width; i++)
 	{
-		if (Obstacles[i] != nullptr && !Obstacles[i]->eaten)
+		if (Obstacles[i] != nullptr && Obstacles[i]->eaten == false)
 		{
 			b.DrawCell(Obstacles[i]->loc, Obstacles[i]->c);
 		}
@@ -39,7 +39,7 @@ void SpeedObstacles::Draw(Board & b)
 
 void SpeedObstacles::Remove(Location & loc)
 {
-	Obstacles[loc.y*Board::Width + loc.x]->eaten = false;
+	Obstacles[loc.y*Board::Width + loc.x]->eaten = true;
 }
 
 bool SpeedObstacles::IsTaken(Location & loc)
