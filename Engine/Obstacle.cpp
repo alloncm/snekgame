@@ -17,7 +17,7 @@ void Obstacles::Add(Snake snek, Goal g)
 	{
 		newloc.x = xdist(gen);
 		newloc.y = ydist(gen);
-	} while (snek.isInTile(newloc)||IsInTile(newloc)||(newloc==g.GetLoc()));
+	} while (snek.isInTile(newloc)||IsInTile(newloc)||(newloc==g.GetLoc()));				//change those IsIntile functions to the new form
 	obs[size].loc = newloc;
 	size++;
 }

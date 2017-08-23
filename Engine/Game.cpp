@@ -36,7 +36,8 @@ Game::Game(MainWindow& wnd) :
 	snekMovePeriod(0.1),
 	obs(),
 	addObs(0),
-	ft()
+	ft(),
+	speedObs(brd)
 {
 }
 
@@ -126,9 +127,11 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
+	speedObs.Draw(brd);
 	brd.ReformatBoard();
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();
 	obs.Draw(brd);
+	
 }

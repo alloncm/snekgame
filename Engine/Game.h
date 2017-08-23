@@ -29,6 +29,7 @@
 #include "Goal.h"
 #include "Obstacle.h"
 #include "FrameTime.h"
+#include "SpeedObstacles.h"
 class Game
 {
 public:
@@ -61,5 +62,6 @@ private:
 	Obstacles obs;						//obstackes object
 	int addObs;							//counter to check if the snak ate enough targets to add obs
 	static constexpr int obsRate = 1;	//obstacle spawn rate
+	SpeedObstacles speedObs;
 	/********************************/
 };
