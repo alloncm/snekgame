@@ -33,7 +33,7 @@ Game::Game(MainWindow& wnd) :
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(0.1),
+	snekMovePeriod(0.2),
 	obs(),
 	addObs(0),
 	ft(),
@@ -91,12 +91,12 @@ void Game::UpdateModel()
 				const bool eating = next == goal.GetLoc();		//checks for eating the goal
 				if (eating)
 				{
-					snek.Grow(delta);		//increase the segments by one and moves the snek
+					snek.Grow(delta,brd);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
 				}
 				else
 				{
-					snek.MoveBy(delta);
+					snek.MoveBy(delta, brd);
 				}
 				if (eating)
 				{
@@ -112,7 +112,7 @@ void Game::UpdateModel()
 				}
 				if (addObs >= obsRate)
 				{
-					obs.Add(snek, goal);
+					obs.Add(brd);
 					addObs = 0;
 				}
 			}
@@ -127,7 +127,7 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
-	speedObs.Draw(brd);
+	//speedObs.Draw(brd);
 	brd.ReformatBoard();
 	snek.Draw(brd);
 	goal.Draw(brd);

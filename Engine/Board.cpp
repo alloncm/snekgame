@@ -60,7 +60,7 @@ bool Board::IsInBounds(Location & l) const
 
 void Board::ReformatBoard()
 {
-	for (int i = 0; i < Width*Height - 1; i++)
+	for (int i = 0; i < Width*Height ; i++)
 	{
 		this->isEmptyTile[i] = true;
 	}

@@ -14,8 +14,8 @@ public:
 
 public:
 	static constexpr int Dimension = 40;
-	static constexpr int Width = 20;
-	static constexpr int Height = 15;
+	static constexpr int Width = 15;
+	static constexpr int Height = 10;
 	static constexpr int startx = 0;
 	static constexpr int starty = 0;
 	

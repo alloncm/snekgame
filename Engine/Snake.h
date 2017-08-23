@@ -19,8 +19,8 @@ private:
 	};
 public:
 	Snake(Location& loc);
-	void MoveBy(const Location& delta);
-	void Grow(const Location& delta);
+	void MoveBy(const Location& delta, Board& b);
+	void Grow(const Location& delta,Board& b);
 	void Draw(Board& brd);
 	Location GetNextLocation(Location& delta);
 	bool IsInTileExeptEnd(const Location& loc);

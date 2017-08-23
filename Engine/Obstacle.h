@@ -1,7 +1,6 @@
 #pragma once
 #include "Board.h"
-#include "Snake.h"
-#include "Goal.h"
+
 class Obstacles
 {
 private:
@@ -17,7 +16,7 @@ private:
 	int size;
 public:
 	Obstacles();
-	void Add(Snake snek, Goal g);
+	void Add(Board& b);
 	bool IsInTile(const Location& loc) const;
-	void Draw(Board brd);
+	void Draw(Board& brd);
 };
