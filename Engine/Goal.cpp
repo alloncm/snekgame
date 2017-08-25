@@ -1,12 +1,12 @@
 #include "Goal.h"
 #include<ctime>
 
-Goal::Goal(std::mt19937 rng, const Board & brd, const Snake & snek)
+Goal::Goal(std::mt19937 rng,  Board & brd, const Snake & snek)
 {
 	Respawn(rng, brd, snek);		//respawn the snek
 }
 
-void Goal::Respawn(std::mt19937 rng, const Board & brd, const Snake & snek)
+void Goal::Respawn(std::mt19937 rng, Board & brd, const Snake & snek)
 {
 	std::mt19937 gen(static_cast<std::mt19937::result_type>(std::time(nullptr)));
 	std::uniform_int_distribution<int> xdist(0, Board::Width - 1);		//initialize the random
@@ -19,13 +19,15 @@ void Goal::Respawn(std::mt19937 rng, const Board & brd, const Snake & snek)
 	{
 		newloc.x = xdist(gen);
 		newloc.y = ydist(gen);	
-	} while (snek.isInTile(newloc));
+	} while (!brd.IsTileEmpty(newloc));
 	loc = newloc;
+	brd.TileIsFull(loc);
 }
 
 void Goal::Draw(Board & brd) const
 {
 	brd.DrawCell(loc, c);
+	brd.TileIsFull(loc);
 }
 
 const Location & Goal::GetLoc() const

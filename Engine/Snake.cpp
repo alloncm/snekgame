@@ -6,24 +6,26 @@ Snake::Snake(Location& loc)
 	size = 1;
 }
 
-void Snake::MoveBy(const Location & delta)
+void Snake::MoveBy(const Location & delta , Board& b)
 {
 	
 	for (int i = size - 1; i > 0; i--)
 	{
 		segments[i].Follow(segments[i - 1]);
+		b.TileIsFull(segments[i].GetLoc());
 	}
 	segments[0].MoveBy(delta);
+	b.TileIsFull(segments[0].GetLoc());
 }
 
-void Snake::Grow(const Location& delta)
+void Snake::Grow(const Location& delta, Board& brd)
 {
 	if(size<Snake::MaxSize)
 	{
 		segments[size].InitBody();
 		size++;
 	}
-	MoveBy(delta);
+	MoveBy(delta,brd);
 }
 
 void Snake::Draw(Board & brd)
@@ -89,6 +91,7 @@ void Snake::Segment::MoveBy(const Location & delta)
 void Snake::Segment::Draw(Board & brd)
 {
 	brd.DrawCell(loc, c);
+	brd.TileIsFull(loc);
 }
 
 const Location& Snake::Segment::GetLoc()const

@@ -141,6 +141,7 @@
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="DXErr.h" />
+    <ClInclude Include="FrameTime.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Graphics.h" />
@@ -151,11 +152,13 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="SpeedObstacles.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="DXErr.cpp" />
+    <ClCompile Include="FrameTime.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -166,6 +169,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SpeedObstacles.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>

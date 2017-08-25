@@ -21,6 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+using namespace std::chrono;
 
 Game::Game(MainWindow& wnd) :
 	wnd(wnd),
@@ -32,9 +33,11 @@ Game::Game(MainWindow& wnd) :
 	snekCounter(0),
 	isGameOver(false),
 	goal(rng, brd, snek),
-	snekMovePeriod(8),
+	snekMovePeriod(0.2),
 	obs(),
-	addObs(0)
+	addObs(0),
+	ft(),
+	speedObs(brd)
 {
 }
 
@@ -70,14 +73,15 @@ void Game::UpdateModel()
 		}
 
 
-		snekCounter++;	//increasing the frames passed since last move
 		Location next = snek.GetNextLocation(delta);	//getting the next location of the snek by the keys been pressed
 		
+		snekCounter += ft.Mark();
+
 		//checks if the numbers of frames that passed is enough to move the snek
 		if (snekCounter >= snekMovePeriod)
 		{
 			snekCounter = 0;		//init the counter
-
+		
 			//checks for game over
 			isGameOver = CheckForGameOver(next);
 			
@@ -87,27 +91,34 @@ void Game::UpdateModel()
 				const bool eating = next == goal.GetLoc();		//checks for eating the goal
 				if (eating)
 				{
-					snek.Grow(delta);		//increase the segments by one and moves the snek
+					snek.Grow(delta,brd);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
 				}
 				else
 				{
-					snek.MoveBy(delta);
+					snek.MoveBy(delta, brd);
 				}
 				if (eating)
 				{
 					goal.Respawn(rng, brd, snek);//respawn the goal
 					//checks if the goal respawn on an existing obstacle
-					while (obs.IsInTile(goal.GetLoc()))
+					/*
+					while (brd.IsTileEmpty(goal.GetLoc()))
 					{
 						goal.Respawn(rng, brd, snek);
 					}
+					*/
 					addObs++;
 				}
 				if (addObs >= obsRate)
 				{
-					obs.Add(snek, goal);
+					obs.Add(brd);
 					addObs = 0;
+				}
+				if (speedObs.IsTaken(next))
+				{
+					speedObs.Remove(next);
+					snekMovePeriod *= 0.90;
 				}
 			}
 		}
@@ -121,8 +132,11 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
+	speedObs.Draw(brd);
+	brd.ReformatBoard();
 	snek.Draw(brd);
 	goal.Draw(brd);
 	brd.DrawBorder();
 	obs.Draw(brd);
+	
 }

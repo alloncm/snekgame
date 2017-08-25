@@ -4,6 +4,7 @@
 Board::Board(Graphics & g) :
 	gfx(g)
 {
+	ReformatBoard();
 }
 
 void Board::DrawCell(const Location & loc, Color c)
@@ -55,4 +56,22 @@ void Board::DrawBorder()
 bool Board::IsInBounds(Location & l) const
 {
 	return l.x >= 0 && l.x < Width&&l.y >= 0 && l.y < Height;
+}
+
+void Board::ReformatBoard()
+{
+	for (int i = 0; i < Width*Height ; i++)
+	{
+		this->isEmptyTile[i] = true;
+	}
+}
+
+bool Board::IsTileEmpty(const Location & loc) const
+{
+	return isEmptyTile[loc.y*Width + loc.x];
+}
+
+void Board::TileIsFull(const Location & loc)
+{
+	this->isEmptyTile[loc.y*Width + loc.x] = false;
 }
