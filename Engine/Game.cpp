@@ -28,9 +28,10 @@ using namespace std::chrono;
 Game::Game(MainWindow& wnd) :
 	wnd(wnd),
 	gfx(wnd),
-	brd(gfx),
+	gc(),
+	brd(gfx,gc.GetWidth(),gc.GetHeight(),gc.GetDim()),
 	rng(rd()),
-	snek(Location{ Board::Width / 2,Board::Height / 2 }),
+	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }),
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),
@@ -38,46 +39,9 @@ Game::Game(MainWindow& wnd) :
 	obs(),
 	addObs(0),
 	ft(),
-	speedObs(brd),
-	goals(nGoals,rng,brd)
+	speedObs(brd,gc.GetpAmount()),
+	goals(gc.GetfAmount(),rng,brd)
 {
-	int width = 0;
-	int height = 0;
-	int tile = 0;
-	float Speed = 0;
-	int pAmount = 0;
-	int fAmount = 0;
-	std::ifstream in("configuration.txt");
-	std::string str;
-	char c = 0;
-	while (in >> c)
-	{
-		if (c == '[')
-		{
-			std::getline(in, str, ']');
-			if (!str.compare("Board Size"))
-			{
-				in >> width >> height;
-			}
-			else if (!str.compare("Tile Size"))
-			{
-				in >> tile;
-			}
-			else if (!str.compare("Speedup Rate"))
-			{
-				in >> Speed;
-			}
-			else if (!str.compare("Poision Amount"))
-			{
-				in >> pAmount;
-			}
-			else if (!str.compare("Food Amount"))
-			{
-				in >> fAmount;
-			}
-		}
-	}
-
 }
 
 void Game::Go()
@@ -132,7 +96,7 @@ void Game::UpdateModel()
 			{
 				bool eating = next == goals[0].GetLoc();
 				int index = 0;
-				for (int i = 1; i < nGoals &&eating==false; i++)
+				for (int i = 1; i < gc.GetfAmount() &&eating==false; i++)
 				{
 					eating = next == goals[i].GetLoc();
 					index = i;
@@ -164,10 +128,10 @@ void Game::UpdateModel()
 					obs.Add(brd);
 					addObs = 0;
 				}
-				if (speedObs.IsTaken(next))
+				if (speedObs.IsTaken(brd,next))
 				{
-					speedObs.Remove(next);
-					snekMovePeriod *= 0.95;
+					speedObs.Remove(brd,next);
+					snekMovePeriod *= gc.GetSpeed();
 				}
 				
 			}

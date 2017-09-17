@@ -1,6 +1,7 @@
 #pragma once
 #include"Board.h"
 
+
 class SpeedObstacles
 {
 	struct Obstacle
@@ -9,19 +10,19 @@ class SpeedObstacles
 		Color c;
 		bool eaten;
 
+		Obstacle();
 		Obstacle(Location& loc, Color c);
 	};
 public:
-	static const int numObs = (Board::Height*Board::Width) / 8;
 
 private:
-	Obstacle* Obstacles[Board::Height*Board::Width];
+	Obstacle* Obstacles;
 	Color color = Colors::Magenta;
 
 public:
-	SpeedObstacles(Board& b);
+	SpeedObstacles(Board& b,int obsNum);
 	void Draw(Board& b);
-	void Remove(Location & loc);
-	bool IsTaken(Location & loc);
+	void Remove(const Board& b,Location & loc);
+	bool IsTaken(const Board& b,Location & loc);
 	~SpeedObstacles();
 };

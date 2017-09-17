@@ -1,9 +1,9 @@
 [Board Size]
 40 30
 [Tile Size]
-10
+20
 [Speedup Rate]
-10
+0.95
 [Poision Amount]
 100
 [Food Amount]

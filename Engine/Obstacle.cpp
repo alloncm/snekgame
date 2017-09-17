@@ -8,8 +8,8 @@ Obstacles::Obstacles():
 void Obstacles::Add(Board& b)
 {
 	std::mt19937 gen(static_cast<std::mt19937::result_type>(std::time(nullptr)));
-	std::uniform_int_distribution<int> xdist(0, Board::Width - 1);		//initialize the random
-	std::uniform_int_distribution<int> ydist(0, Board::Height - 1);
+	std::uniform_int_distribution<int> xdist(0, b.GetWidth() - 1);		//initialize the random
+	std::uniform_int_distribution<int> ydist(0, b.GetHeight() - 1);
 
 	Location newloc;		//the new location to respwan
 

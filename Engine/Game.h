@@ -30,6 +30,7 @@
 #include "Obstacle.h"
 #include "FrameTime.h"
 #include "SpeedObstacles.h"
+#include"GameConfig.h"
 class Game
 {
 public:
@@ -49,7 +50,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables */
-	static constexpr int nGoals = 8;	//the number of goals on the screen 
+	GameConfig gc;						//contains cofiguration for the game to read from a file 
 	FrameTimer ft;						//frame timer to count up the time for a move
 	Snake snek;							//snek object
 	Board brd;							//board object	

@@ -75,6 +75,9 @@
     <ClInclude Include="Goals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Goals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
