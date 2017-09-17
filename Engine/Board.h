@@ -13,9 +13,9 @@ public:
 	void TileIsFull(const Location& loc);
 
 public:
-	static constexpr int Dimension = 10;
-	static constexpr int Width = 80;
-	static constexpr int Height = 60;
+	static constexpr int Dimension = 20;
+	static constexpr int Width = 40;
+	static constexpr int Height = 30;
 	static constexpr int startx = 0;
 	static constexpr int starty = 0;
 	

@@ -32,13 +32,14 @@ Game::Game(MainWindow& wnd) :
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),
-	goal(rng, brd, snek),
 	snekMovePeriod(0.2),
 	obs(),
 	addObs(0),
 	ft(),
-	speedObs(brd)
+	speedObs(brd),
+	goals(nGoals,rng,brd)
 {
+	
 }
 
 void Game::Go()
@@ -88,10 +89,17 @@ void Game::UpdateModel()
 			
 			if(!isGameOver)
 			{
-				const bool eating = next == goal.GetLoc();		//checks for eating the goal
+				bool eating = next == goals[0].GetLoc();
+				int index = 0;
+				for (int i = 1; i < nGoals &&eating==false; i++)
+				{
+					eating = next == goals[i].GetLoc();
+					index = i;
+					//checks for eating the goal
+				}
 				if (eating)
 				{
-					snek.Grow(delta,brd);		//increase the segments by one and moves the snek
+					snek.Grow(delta, brd);		//increase the segments by one and moves the snek
 					//if the move period is not the max decrease 1
 				}
 				else
@@ -100,7 +108,7 @@ void Game::UpdateModel()
 				}
 				if (eating)
 				{
-					goal.Respawn(rng, brd, snek);//respawn the goal
+					goals[index].Respawn(rng, brd);//respawn the goal
 					//checks if the goal respawn on an existing obstacle
 					/*
 					while (brd.IsTileEmpty(goal.GetLoc()))
@@ -118,8 +126,9 @@ void Game::UpdateModel()
 				if (speedObs.IsTaken(next))
 				{
 					speedObs.Remove(next);
-					snekMovePeriod *= 0.90;
+					snekMovePeriod *= 0.95;
 				}
+				
 			}
 		}
 	}
@@ -135,7 +144,7 @@ void Game::ComposeFrame()
 	speedObs.Draw(brd);
 	brd.ReformatBoard();
 	snek.Draw(brd);
-	goal.Draw(brd);
+	goals.Draw(brd);
 	brd.DrawBorder();
 	obs.Draw(brd);
 	

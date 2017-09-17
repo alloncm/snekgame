@@ -1,12 +1,12 @@
 #include "Goal.h"
 #include<ctime>
 
-Goal::Goal(std::mt19937 rng,  Board & brd, const Snake & snek)
+Goal::Goal(std::mt19937 rng,  Board & brd)
 {
-	Respawn(rng, brd, snek);		//respawn the snek
+	Respawn(rng, brd);		//respawn the snek
 }
 
-void Goal::Respawn(std::mt19937 rng, Board & brd, const Snake & snek)
+void Goal::Respawn(std::mt19937 rng, Board & brd)
 {
 	std::mt19937 gen(static_cast<std::mt19937::result_type>(std::time(nullptr)));
 	std::uniform_int_distribution<int> xdist(0, Board::Width - 1);		//initialize the random

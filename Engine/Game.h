@@ -26,7 +26,7 @@
 #include "Board.h"
 #include <random>
 #include "Snake.h"
-#include "Goal.h"
+#include "Goals.h"
 #include "Obstacle.h"
 #include "FrameTime.h"
 #include "SpeedObstacles.h"
@@ -49,19 +49,21 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables */
+	static constexpr int nGoals = 8;	//the number of goals on the screen 
 	FrameTimer ft;						//frame timer to count up the time for a move
 	Snake snek;							//snek object
 	Board brd;							//board object	
 	Location delta;						//location object to move by
 	std::mt19937 rng;					//random object to respawn goals
 	std::random_device rd;				//ranon object
-	Goal goal;							//goal object
-	float snekMovePeriod;					//the period of frames the snek moves by	
+	Goals goals;						//goal object
+	float snekMovePeriod;				//the period of frames the snek moves by	
 	float snekCounter;					//counts the frames passed from last move
 	bool isGameOver;					//checks for game over
 	Obstacles obs;						//obstackes object
 	int addObs;							//counter to check if the snak ate enough targets to add obs
 	static constexpr int obsRate = 1;	//obstacle spawn rate
-	SpeedObstacles speedObs;
+	SpeedObstacles speedObs;			//the speed obstacles object
+	
 	/********************************/
 };
