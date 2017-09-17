@@ -20,6 +20,8 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include<fstream>
+#include<string>
 
 using namespace std::chrono;
 
@@ -39,15 +41,54 @@ Game::Game(MainWindow& wnd) :
 	speedObs(brd),
 	goals(nGoals,rng,brd)
 {
-	
+	int width = 0;
+	int height = 0;
+	int tile = 0;
+	float Speed = 0;
+	int pAmount = 0;
+	int fAmount = 0;
+	std::ifstream in("configuration.txt");
+	std::string str;
+	char c = 0;
+	while (in >> c)
+	{
+		if (c == '[')
+		{
+			std::getline(in, str, ']');
+			if (!str.compare("Board Size"))
+			{
+				in >> width >> height;
+			}
+			else if (!str.compare("Tile Size"))
+			{
+				in >> tile;
+			}
+			else if (!str.compare("Speedup Rate"))
+			{
+				in >> Speed;
+			}
+			else if (!str.compare("Poision Amount"))
+			{
+				in >> pAmount;
+			}
+			else if (!str.compare("Food Amount"))
+			{
+				in >> fAmount;
+			}
+		}
+	}
+
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
-	UpdateModel();
-	ComposeFrame();
-	gfx.EndFrame();
+	if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+	{
+		gfx.BeginFrame();
+		UpdateModel();
+		ComposeFrame();
+		gfx.EndFrame();
+	}
 }
 
 void Game::UpdateModel()

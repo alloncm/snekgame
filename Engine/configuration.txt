@@ -1,0 +1,10 @@
+[Board Size]
+40 30
+[Tile Size]
+10
+[Speedup Rate]
+10
+[Poision Amount]
+100
+[Food Amount]
+10
