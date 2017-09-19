@@ -46,13 +46,10 @@ Game::Game(MainWindow& wnd) :
 
 void Game::Go()
 {
-	if (wnd.kbd.KeyIsPressed(VK_CONTROL))
-	{
-		gfx.BeginFrame();
-		UpdateModel();
-		ComposeFrame();
-		gfx.EndFrame();
-	}
+	gfx.BeginFrame();
+	UpdateModel();
+	ComposeFrame();
+	gfx.EndFrame();
 }
 
 void Game::UpdateModel()
