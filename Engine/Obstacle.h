@@ -8,10 +8,11 @@ private:
 	{
 		Location loc;
 		Color c;
+	public:
+		Obstacle(Location& loc, Color c);
 	};
 private:
-	static constexpr int obsSize = 50;
-	Obstacle obs[obsSize];
+	std::vector<Obstacle> obs;
 	Color c = Colors::White;
 	int size;
 public:

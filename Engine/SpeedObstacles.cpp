@@ -3,8 +3,9 @@
 #include<random>
 
 SpeedObstacles::SpeedObstacles(Board& b,int numObs)
+	:
+	Obstacles(b.GetHeight()*b.GetWidth())
 {
-	Obstacles = new Obstacle[b.GetHeight()*b.GetWidth()];
 	std::mt19937 gen(static_cast<std::mt19937::result_type>(std::time(nullptr)));
 	std::uniform_int_distribution<int> xdist(0, b.GetWidth() - 1);		//initialize the random
 	std::uniform_int_distribution<int> ydist(0, b.GetHeight() - 1);
@@ -50,7 +51,6 @@ bool SpeedObstacles::IsTaken(const Board& b,Location & loc)
 
 SpeedObstacles::~SpeedObstacles()
 {
-	delete[]Obstacles;
 }
 
 SpeedObstacles::Obstacle::Obstacle()
@@ -60,10 +60,10 @@ SpeedObstacles::Obstacle::Obstacle()
 	c = Colors::Black;
 }
 
-SpeedObstacles::Obstacle::Obstacle(Location & l, Color c)
+SpeedObstacles::Obstacle::Obstacle(Location& loc, Color c)
 {
-	this->loc.x = l.x;
-	this->loc.y = l.y;
+	this->loc.x = loc.x;
+	this->loc.y = loc.y;
 	this->c = c;
 	eaten = false;
 }

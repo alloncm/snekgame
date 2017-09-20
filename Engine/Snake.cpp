@@ -1,10 +1,16 @@
 #include "Snake.h"
 
-Snake::Snake(Location& loc)
+Snake::Snake(Location& loc,int size)
+	:
+	segments()
 {
-	segments[0].InitHead(loc);
-	size = 1;
+	Segment s;
+	s.InitHead(loc);
+	segments.push_back(s);
+	this->size = 1;
 }
+
+
 
 void Snake::MoveBy(const Location & delta , Board& b)
 {
@@ -20,11 +26,10 @@ void Snake::MoveBy(const Location & delta , Board& b)
 
 void Snake::Grow(const Location& delta, Board& brd)
 {
-	if(size<Snake::MaxSize)
-	{
-		segments[size].InitBody();
-		size++;
-	}
+	Segment s;
+	s.InitBody();
+	segments.push_back(s);
+	size++;
 	MoveBy(delta,brd);
 }
 

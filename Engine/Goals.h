@@ -1,6 +1,6 @@
 #pragma once
 #include"Goal.h"
-
+#include<vector>
 class Goals
 {
 public:
@@ -12,6 +12,6 @@ public:
 	int Size();
 	~Goals();
 private:
-	Goal* goals;
+	std::vector<Goal> goals;
 	int size;
 };

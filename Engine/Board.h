@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "Location.h"
+#include <vector>
 class Board
 {
 public:
@@ -20,7 +21,7 @@ public:
 
 private:
 	Graphics& gfx;
-	bool* isEmptyTile;
+	std::vector<bool> isEmptyTile;
 	int height;
 	int width;
 	int dim;

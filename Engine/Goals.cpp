@@ -1,13 +1,14 @@
 #include "Goals.h"
 
 Goals::Goals(int num, std::mt19937 rng, Board& brd)
+	:
+	goals(num),
+	size(num)
 {
-	goals = new Goal[num];
 	for (int i = 0; i < num; i++)
 	{
 		goals [i] = Goal(rng, brd);
 	}
-	size = num;
 }
 
 Goal & Goals::operator[](int i)
@@ -30,5 +31,4 @@ int Goals::Size()
 
 Goals::~Goals()
 {
-	delete[]goals;
 }

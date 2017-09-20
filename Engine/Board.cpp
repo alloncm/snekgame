@@ -5,9 +5,9 @@ Board::Board(Graphics & g, int w, int h, int d) :
 	gfx(g),
 	width(w),
 	height(h),
-	dim(d)
+	dim(d),
+	isEmptyTile(w*h)
 {
-	isEmptyTile = new bool[w*h];
 	ReformatBoard();
 }
 

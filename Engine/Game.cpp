@@ -31,7 +31,7 @@ Game::Game(MainWindow& wnd) :
 	gc(),
 	brd(gfx,gc.GetWidth(),gc.GetHeight(),gc.GetDim()),
 	rng(rd()),
-	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }),
+	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 },100),
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),

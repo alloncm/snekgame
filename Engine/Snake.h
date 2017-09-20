@@ -18,7 +18,7 @@ private:
 
 	};
 public:
-	Snake(Location& loc);
+	Snake(Location& loc,int size);
 	void MoveBy(const Location& delta, Board& b);
 	void Grow(const Location& delta,Board& b);
 	void Draw(Board& brd);
@@ -26,8 +26,7 @@ public:
 	bool IsInTileExeptEnd(const Location& loc);
 	bool isInTile(const Location& loc)const;
 private:
-	static constexpr int MaxSize = 100;
-	Segment segments[MaxSize];
+	std::vector<Segment> segments;
 	int size;
 	static constexpr Color HaedColor = Colors::Yellow;
 	static constexpr Color BodyColor = Colors::Green;

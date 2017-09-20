@@ -16,7 +16,7 @@ class SpeedObstacles
 public:
 
 private:
-	Obstacle* Obstacles;
+	std::vector<Obstacle> Obstacles;
 	Color color = Colors::Magenta;
 
 public:

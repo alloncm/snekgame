@@ -2,7 +2,8 @@
 #include <ctime>
 #include<random>
 Obstacles::Obstacles():
-	size(0)
+	size(0),
+	obs()
 {
 }
 void Obstacles::Add(Board& b)
@@ -19,7 +20,7 @@ void Obstacles::Add(Board& b)
 		newloc.x = xdist(gen);
 		newloc.y = ydist(gen);
 	} while (!b.IsTileEmpty(newloc));				//change those IsIntile functions to the new form
-	obs[size].loc = newloc;
+	obs.push_back(Obstacle(newloc, c));
 	b.TileIsFull(obs[size].loc);
 	size++;
 }
@@ -43,4 +44,11 @@ void Obstacles::Draw(Board & brd)
 		brd.DrawCell(obs[i].loc, c);
 		brd.TileIsFull(obs[i].loc);
 	}
+}
+
+inline Obstacles::Obstacle::Obstacle(Location & loc, Color c)
+{
+	this->loc.x = loc.x;
+	this->loc.y = loc.y;
+	this->c = c;
 }
