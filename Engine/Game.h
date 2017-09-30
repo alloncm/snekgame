@@ -31,6 +31,7 @@
 #include "FrameTime.h"
 #include "SpeedObstacles.h"
 #include"GameConfig.h"
+#include"Surface.h"
 class Game
 {
 public:
@@ -65,6 +66,6 @@ private:
 	int addObs;							//counter to check if the snak ate enough targets to add obs
 	static constexpr int obsRate = 1;	//obstacle spawn rate
 	SpeedObstacles speedObs;			//the speed obstacles object
-	
+	Surface s = Surface("snekh1.bmp");
 	/********************************/
 };

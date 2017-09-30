@@ -143,11 +143,13 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
+	/*
 	speedObs.Draw(brd);
 	brd.ReformatBoard();
 	snek.Draw(brd);
 	goals.Draw(brd);
 	brd.DrawBorder();
 	obs.Draw(brd);
-	
+	*/
+	gfx.DrawSprite(100, 100, s);
 }
