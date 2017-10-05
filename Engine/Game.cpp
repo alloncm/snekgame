@@ -29,9 +29,9 @@ Game::Game(MainWindow& wnd) :
 	wnd(wnd),
 	gfx(wnd),
 	gc(),
-	brd(gfx,gc.GetWidth(),gc.GetHeight(),gc.GetDim()),
+	brd(gfx, gc.GetWidth(), gc.GetHeight(), gc.GetDim()),
 	rng(rd()),
-	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 },100),
+	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }, 100),
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),
@@ -39,8 +39,11 @@ Game::Game(MainWindow& wnd) :
 	obs(),
 	addObs(0),
 	ft(),
-	speedObs(brd,gc.GetpAmount()),
-	goals(gc.GetfAmount(),rng,brd)
+	speedObs(brd, gc.GetpAmount()),
+	goals(gc.GetfAmount(), rng, brd),
+	isStarted(false),
+	preGame("snek.bmp"),
+	postGame("gameover.bmp")
 {
 }
 
@@ -55,7 +58,7 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	//checks for game over
-	if (!isGameOver)
+	if (!isGameOver&&isStarted)
 	{
 		//moving the snek with the keyboard
 		if (wnd.kbd.KeyIsPressed(VK_UP))
@@ -134,6 +137,14 @@ void Game::UpdateModel()
 			}
 		}
 	}
+	else
+	{
+		//if the user press enter is started equals true
+		if (wnd.kbd.KeyIsPressed(VK_RETURN))
+		{
+			isStarted = true;
+		}
+	}
 }
 bool Game::CheckForGameOver(Location& nextloc)
 {
@@ -143,10 +154,25 @@ bool Game::CheckForGameOver(Location& nextloc)
 void Game::ComposeFrame()
 {
 	//draw the fucking objects
-	brd.ReformatBoard();
-	speedObs.Draw(brd);
-	snek.Draw(brd);
-	goals.Draw(brd);
-	brd.DrawBorder();
-	obs.Draw(brd);
+	if (!isStarted)
+	{
+		Location center{ Graphics::ScreenWidth / 2,Graphics::ScreenHeight / 2 };
+		RectI r(preGame.GetWidth(), preGame.GetHeight(), center);
+		gfx.DrawSpriteNonChroma(r.GetTopLeft().x,r.GetTopLeft().y, preGame);
+	}
+	else if (isGameOver)
+	{
+		Location center{ Graphics::ScreenWidth / 2,Graphics::ScreenHeight / 2 };
+		RectI r(postGame.GetWidth(), postGame.GetHeight(), center);
+		gfx.DrawSpriteNonChroma(r.GetTopLeft().x, r.GetTopLeft().y, postGame);
+	}
+	else
+	{
+		brd.ReformatBoard();
+		speedObs.Draw(brd);
+		snek.Draw(brd);
+		goals.Draw(brd);
+		brd.DrawBorder();
+		obs.Draw(brd);
+	}
 }

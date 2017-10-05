@@ -25,6 +25,7 @@ Surface::Surface(const Surface & s)
 Surface::Surface(const std::string & filename)
 {
 	std::ifstream file(filename,std::ios::binary);
+	assert(file);
 
 	BITMAPFILEHEADER bmFileHeader;
 
@@ -116,7 +117,7 @@ Color Surface::GetPixel(int x, int y) const
 	return pPixels[y*width + x];
 }
 
-int Surface::GetWidht() const
+int Surface::GetWidth() const
 {
 	return width;
 }
@@ -124,6 +125,11 @@ int Surface::GetWidht() const
 int Surface::GetHeight() const
 {
 	return height;
+}
+
+RectI Surface::GetRect() const
+{
+	return{ {0,0},{width,height} };
 }
 
 Surface::~Surface()

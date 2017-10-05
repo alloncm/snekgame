@@ -58,7 +58,13 @@ public:
 	void PutPixel( int x,int y,Color c );
 	void DrawRect(int x, int y, int width, int height, Color c);
 	void DrawSmallRect(int x, int y, int width, int height, Color c);
-	void DrawSprite(int x, int y, Surface& s);
+	void DrawSpriteNonChroma(int x, int y, const Surface& s);
+	void DrawSpriteNonChroma(int x, int y, RectI& r, const Surface& s);
+	void DrawSpriteNonChroma(int x, int y, RectI& r, RectI& clip, const Surface& s);
+	void DrawSprite(int x, int y, const Surface& s, Color chroma);
+	void DrawSprite(int x, int y, RectI& r, const Surface& s, Color chroma);
+	void DrawSprite(int x, int y, RectI& r, RectI& clip, const Surface& s, Color chroma);
+	RectI GetScreenRect()const;
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

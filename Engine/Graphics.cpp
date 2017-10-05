@@ -338,18 +338,57 @@ void Graphics::DrawSmallRect(int x, int y, int width, int height, Color c)
 	}
 }
 
-void Graphics::DrawSprite(int x, int y, Surface & s)
+void Graphics::DrawSpriteNonChroma(int x, int y, const Surface & s)
 {
-	const int width = s.GetWidht();
-	const int height = s.GetHeight();
+	DrawSpriteNonChroma(x, y, s.GetRect(), s);
+}
 
-	for (int sy = 0; sy < height; sy++)
+void Graphics::DrawSpriteNonChroma(int x, int y, RectI & r, const Surface & s)
+{
+	DrawSpriteNonChroma(x, y, r, GetScreenRect(), s);
+}
+
+void Graphics::DrawSpriteNonChroma(int x, int y, RectI & r, RectI & clip, const Surface & s)
+{
+	for (int sy = r.GetTopLeft().y; sy < r.GetBotoomRight().y; sy++)
 	{
-		for (int sx = 0; sx < width; sx++)
+		for (int sx = r.GetTopLeft().x; sx < r.GetBotoomRight().x; sx++)
 		{
-			PutPixel(x + sx, y + sy, s.GetPixel(sx, sy));
+			if (clip.IsInside({ x + sx - r.GetTopLeft().x, y + sy - r.GetTopLeft().y }))
+			{
+				PutPixel(x + sx - r.GetTopLeft().x, y + sy - r.GetTopLeft().y, s.GetPixel(sx, sy));
+			}
 		}
 	}
+}
+
+void Graphics::DrawSprite(int x, int y, const Surface & s, Color chroma)
+{
+	DrawSprite(x, y, s.GetRect(), s, chroma);
+}
+
+void Graphics::DrawSprite(int x, int y, RectI & r, const Surface & s, Color chroma)
+{
+	DrawSprite(x, y, r, GetScreenRect(), s, chroma);
+}
+
+void Graphics::DrawSprite(int x, int y, RectI & r, RectI & clip, const Surface & s, Color chroma)
+{
+	for (int sy = r.GetTopLeft().y; sy < r.GetBotoomRight().y; sy++)
+	{
+		for (int sx = r.GetTopLeft().x; sx < r.GetBotoomRight().x; sx++)
+		{
+			if (clip.IsInside({ x + sx - r.GetTopLeft().x, y + sy - r.GetTopLeft().y }) && s.GetPixel(sx, sy) != chroma)
+			{
+				PutPixel(x + sx - r.GetTopLeft().x, y + sy - r.GetTopLeft().y, s.GetPixel(sx, sy));
+			}
+		}
+	}
+}
+
+RectI Graphics::GetScreenRect() const
+{
+	return{ { 0,0 },{ ScreenWidth,ScreenHeight } };
 }
 
 

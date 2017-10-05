@@ -3,6 +3,7 @@
 #include<string>
 #include"ChiliWin.h"
 #include<fstream>
+#include"RectI.h"
 class Surface
 {
 public:
@@ -12,8 +13,9 @@ public:
 	Surface& operator=(const Surface& s);
 	void PutPixel(int x, int y, Color c);
 	Color GetPixel(int x, int y) const;
-	int GetWidht()const;	
+	int GetWidth()const;	
 	int GetHeight()const;
+	RectI GetRect()const;
 	~Surface();
 private:
 	Color* pPixels = nullptr;
