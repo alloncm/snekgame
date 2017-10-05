@@ -144,12 +144,21 @@ void Game::UpdateModel()
 		{
 			isStarted = true;
 		}
+		if (isGameOver)
+		{
+
+		}
 	}
 }
 bool Game::CheckForGameOver(Location& nextloc)
 {
 	bool gameover = obs.IsInTile(nextloc)|| (!(brd.IsInBounds(nextloc)))|| snek.IsInTileExeptEnd(nextloc);
 	return gameover;
+}
+void Game::ReInitGame()
+{
+	brd.ReformatBoard();
+
 }
 void Game::ComposeFrame()
 {

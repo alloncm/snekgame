@@ -45,6 +45,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	bool CheckForGameOver(Location& nextloc);
+	void ReInitGame();
 	/********************************/
 private:
 	MainWindow& wnd;
