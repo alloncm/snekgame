@@ -5,6 +5,6 @@
 [Speedup Rate]
 0.95
 [Poision Amount]
-100
+5
 [Food Amount]
 10

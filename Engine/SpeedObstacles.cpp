@@ -17,7 +17,7 @@ SpeedObstacles::SpeedObstacles(Board& b,int numObs)
 		{
 			newloc.x = xdist(gen);
 			newloc.y = ydist(gen);
-		} while (!b.IsTileEmpty(newloc) && IsTaken(b,newloc));
+		} while (!b.IsTileEmpty(newloc) || IsTaken(b,newloc));
 		Obstacles[newloc.y*b.GetWidth() + newloc.x] = Obstacle(newloc, color);
 	}
 	
