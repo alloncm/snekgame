@@ -1,6 +1,6 @@
 #include "Snake.h"
 
-Snake::Snake(Location& loc,int size)
+Snake::Snake(Location& loc)
 	:
 	segments()
 {

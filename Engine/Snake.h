@@ -18,7 +18,7 @@ private:
 
 	};
 public:
-	Snake(Location& loc,int size);
+	Snake(Location& loc);
 	void MoveBy(const Location& delta, Board& b);
 	void Grow(const Location& delta,Board& b);
 	void Draw(Board& brd);
