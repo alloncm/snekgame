@@ -6,7 +6,7 @@ class Goals
 public:
 	Goals(int num, std::mt19937 rng, Board& brd);
 	Goals(Goals& g) = delete;
-	Goals operator=(Goals& g) = delete;
+	Goals& operator=(Goals& g);
 	Goal& operator[](int i);
 	void Draw(Board& brd);
 	int Size();

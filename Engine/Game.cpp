@@ -31,7 +31,7 @@ Game::Game(MainWindow& wnd) :
 	gc(),
 	brd(gfx, gc.GetWidth(), gc.GetHeight(), gc.GetDim()),
 	rng(rd()),
-	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }, 100),
+	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }),
 	delta({ 1,0 }),
 	snekCounter(0),
 	isGameOver(false),
@@ -144,9 +144,9 @@ void Game::UpdateModel()
 		{
 			isStarted = true;
 		}
-		if (isGameOver)
+		else if (wnd.kbd.KeyIsPressed(VK_ESCAPE))
 		{
-
+			ReInit();
 		}
 	}
 }
@@ -155,9 +155,34 @@ bool Game::CheckForGameOver(Location& nextloc)
 	bool gameover = obs.IsInTile(nextloc)|| (!(brd.IsInBounds(nextloc)))|| snek.IsInTileExeptEnd(nextloc);
 	return gameover;
 }
-void Game::ReInitGame()
+void Game::ReInit()
 {
-	brd.ReformatBoard();
+	/*
+	snek(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 }),
+	delta({ 1,0 }),
+	snekCounter(0),
+	isGameOver(false),
+	snekMovePeriod(0.2),
+	obs(),
+	addObs(0),
+	ft(),
+	speedObs(brd, gc.GetpAmount()),
+	goals(gc.GetfAmount(), rng, brd),
+	isStarted(false),
+	preGame("snek.bmp"),
+	postGame("gameover.bmp")
+	*/
+	snek = Snake(Location{ gc.GetWidth() / 2,gc.GetHeight() / 2 });
+	delta = { 1,0 };
+	snekCounter = 0;
+	isGameOver = false;
+	snekMovePeriod = 0.2;
+	obs = Obstacles();
+	addObs = 0;
+	ft = FrameTimer();
+	speedObs = SpeedObstacles(brd, gc.GetpAmount());
+	goals = Goals(gc.GetfAmount(), rng, brd);
+	isStarted = false;
 
 }
 void Game::ComposeFrame()
